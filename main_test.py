@@ -95,7 +95,7 @@ if __name__ == "__main__":
     
     test(args, seed) 
 
-### READ_ME ###
+## READ_ME ###
 # python main_test.py --dataset cora --embedding-dim 1433 512 7 --attack_name pgd --ptb_rate 0.05
 # python main_test.py --dataset cora --embedding-dim 1433 512 7 --attack_name pgd --ptb_rate 0.1
 # python main_test.py --dataset cora --embedding-dim 1433 512 7 --attack_name pgd --ptb_rate 0.15
