@@ -1,0 +1,9 @@
+python==3.6
+torch>=1.4.0
+dgl-cu101==0.4.2
+scikit-learn
+networkx
+scipy
+matplotlib
+argparse
+numpy
