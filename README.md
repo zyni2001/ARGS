@@ -19,6 +19,7 @@ Install these packages using pip:
 
 ```bash
 pip install -r requirements.txt
+```
 
 ## Evaluation 
 The main script can be run with different settings. Here is the example usage:
