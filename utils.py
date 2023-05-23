@@ -4,10 +4,8 @@ import networkx as nx
 import scipy.sparse as sp
 from scipy.sparse.linalg import eigsh
 import sys
-import pdb
 import torch
-from sklearn.metrics.pairwise import cosine_similarity
-# import metis
+
 
 
 def parse_index_file(filename):

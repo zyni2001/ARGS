@@ -132,19 +132,17 @@ def subgradient_update_mask(model, args):
 def get_mask_distribution(model, if_numpy=True):
 
     adj_mask_tensor = model.adj_mask1_train.flatten()  ### the mask itself after update.
-    #print("Subhajit see how the mask is updated.")
-    #print("The size of the adj mask is:", adj_mask_tensor.shape)
+
+
     nonzero = torch.abs(adj_mask_tensor) > 0 ### all the locations where the gradient is non-zero. This will the those places where an edge exists.
-    #print("Adj_maks is non-zero:", torch.count_nonzero(adj_mask_tensor))
+
     adj_mask_tensor = adj_mask_tensor[nonzero] # 13264 - 2708
     print("adj_mask_tensor is:", adj_mask_tensor.shape)
 
-
     weight_mask_tensor0 = model.net_layer[0].weight_mask_train.flatten()    # 22928
-    #print("Subhajit see how the mask is updated.")
-    #print("The size of the weight 0 mask is:", weight_mask_tensor0.shape)
+
     nonzero = torch.abs(weight_mask_tensor0) > 0
-    #print("Adj_maks is non-zero:", torch.count_nonzero(adj_mask_tensor))
+
     weight_mask_tensor0 = weight_mask_tensor0[nonzero]
 
     weight_mask_tensor1 = model.net_layer[1].weight_mask_train.flatten()    # 22928
@@ -152,7 +150,7 @@ def get_mask_distribution(model, if_numpy=True):
     weight_mask_tensor1 = weight_mask_tensor1[nonzero]
 
     weight_mask_tensor = torch.cat([weight_mask_tensor0, weight_mask_tensor1]) # 112
-    # np.savez('mask', adj_mask=adj_mask_tensor.detach().cpu().numpy(), weight_mask=weight_mask_tensor.detach().cpu().numpy())
+
     if if_numpy:
         return adj_mask_tensor.detach().cpu().numpy(), weight_mask_tensor.detach().cpu().numpy()
     else:
@@ -198,9 +196,7 @@ def get_each_mask_admm(mask_weight_tensor, threshold):
 def get_final_mask_epoch(model, adj_percent, wei_percent):
     
     adj_mask, wei_mask = get_mask_distribution(model, if_numpy=False)
-    #print("adj_mask is:", adj_mask.shape)
-    #print("wei_mask is: ",wei_mask.shape)
-    #adj_mask.add_((2 * torch.rand(adj_mask.shape) - 1) * 1e-5)
+
     adj_total = adj_mask.shape[0]
     wei_total = wei_mask.shape[0]
     ### sort
@@ -216,15 +212,10 @@ def get_final_mask_epoch(model, adj_percent, wei_percent):
     mask_dict = {}
     ori_adj_mask = model.adj_mask1_train.detach().cpu()
     #get the fixed similarity score matrix
-    # sim_mask = model.sim_score.detach().cpu()
 
-    # ori_adj_mask.add_((2 * torch.rand(ori_adj_mask.shape) - 1) * 1e-5)
     mask_dict['adj_mask'] = get_each_mask(ori_adj_mask, adj_thre)
     mask_dict['weight1_mask'] = get_each_mask(model.net_layer[0].state_dict()['weight_mask_train'], wei_thre)
     mask_dict['weight2_mask'] = get_each_mask(model.net_layer[1].state_dict()['weight_mask_train'], wei_thre)
-    
-    #multiply the new adjacency matrix with the fixed similarity score for next iteration training
-    # mask_dict['sim_mask'] = torch.mul(mask_dict['adj_mask'], sim_mask)
 
     return mask_dict
 
@@ -267,7 +258,6 @@ def oneshot_weight_magnitude_pruning(model, wei_percent):
     weight2_mask = get_each_mask(model.net_layer[1].state_dict()['weight_mask_train'], wei_thre)
 
     return mask_dict
-
 
 
 ##### random pruning #######
@@ -367,18 +357,13 @@ def add_trainable_mask_noise(model, c):
     model.adj_mask1_train.requires_grad = False
     model.net_layer[0].weight_mask_train.requires_grad = False
     model.net_layer[1].weight_mask_train.requires_grad = False
-#### multiplying with 2 and subtracting -1 makes sure the value is between -1 and +1
-#### torch.rand -- any value between [0,1)
+    #### multiplying with 2 and subtracting -1 makes sure the value is between -1 and +1
+    #### torch.rand -- any value between [0,1)
     rand1 = (2 * torch.rand(model.adj_mask1_train.shape) - 1) * c  ##### this will generate random number for every location. c is very small. So the noise is very small.
     rand1 = rand1.to(model.adj_mask1_train.device) 
     #####   this makes sure only the elements where edge is present to be non-zero.
     rand1 = rand1 * model.adj_mask1_train ### * - means elementwise multiplication. Only keep the value where an edge is present.
     model.adj_mask1_train.add_(rand1) ### adding the noise to the mask. But is this fair to add random values. Should there be some initial information added to it too.
-    #print("The adjacency matrix mask is:")
-    #print(model.adj_mask1_train)
-    #print("Adjacency matrix size is:", model.adj_mask1_train.size())
-    #print("No. of non-zero elements:",torch.count_nonzero(model.adj_mask1_train))
-
 
     rand2 = (2 * torch.rand(model.net_layer[0].weight_mask_train.shape) - 1) * c
     rand2 = rand2.to(model.net_layer[0].weight_mask_train.device)
