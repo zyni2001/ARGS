@@ -1,1 +1,1 @@
-mod_graph/* filter=lfs diff=lfs merge=lfs -text
+mod_graph/** filter=lfs diff=lfs merge=lfs -text
