@@ -10,7 +10,7 @@ This repository contains the implementation of ARGS for generating ARGLT for Nod
 <a name="installation"></a>
 ## Installation
 
-This project requires Python 3.6 and the following Python libraries installed:
+This project requires Python 3.8 and the following Python libraries installed:
 
 - torch==1.13.1
 - dgl-cu116
