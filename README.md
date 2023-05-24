@@ -12,13 +12,13 @@ This repository contains the implementation of ARGS Node Classification using GC
 
 This project requires Python 3.6 and the following Python libraries installed:
 
-- torch (>=1.4.0)
-- dgl-cu101 (0.4.2)
+- torch==1.13.1
+- dgl-cu116==1.0.2
 - scikit-learn
 - networkx
 - scipy
 - matplotlib
-- pickle
+- pickle-mixin
 - argparse
 - numpy
 - warnings
