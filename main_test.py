@@ -56,7 +56,7 @@ def test(args, seed):
     state_dict = torch.load(args['model_path'])
     net_gcn.load_state_dict(state_dict)
 
-    # print test results
+    ### print test results
     # adj_spar - means how many edges in graph are present.
     # wei_spar - means how many edges in model are present.
     adj_spar, wei_spar = pruning.print_sparsity(net_gcn) 
@@ -95,21 +95,3 @@ if __name__ == "__main__":
     
     test(args, seed) 
 
-## READ_ME ###
-# python main_test.py --dataset cora --embedding-dim 1433 512 7 --attack_name pgd --ptb_rate 0.05
-# python main_test.py --dataset cora --embedding-dim 1433 512 7 --attack_name pgd --ptb_rate 0.1
-# python main_test.py --dataset cora --embedding-dim 1433 512 7 --attack_name pgd --ptb_rate 0.15
-# python main_test.py --dataset cora --embedding-dim 1433 512 7 --attack_name pgd --ptb_rate 0.2
-
-# python main_test.py --dataset citeseer --embedding-dim 3703 512 6 --attack_name pgd --ptb_rate 0.05
-# python main_test.py --dataset citeseer --embedding-dim 3703 512 6 --attack_name pgd --ptb_rate 0.1
-# python main_test.py --dataset citeseer --embedding-dim 3703 512 6 --attack_name pgd --ptb_rate 0.15
-# python main_test.py --dataset citeseer --embedding-dim 3703 512 6 --attack_name pgd --ptb_rate 0.2
-
-# mean_accuracies_gcn_cora = {
-#     'pgd': [78.81, 78.46, 77.93, 77.99],
-# }
-
-# mean_accuracies_gcn_citeseer = {
-#     'pgd': [73.28, 73.96, 74.62, 73.52],
-# }
