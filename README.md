@@ -1,6 +1,6 @@
 # ARGS Node Classification (GCN) on Cora, Citeseer Datasets under PGD attack
 
-This repository contains the implementation of ARGS Node Classification using GCN on Cora, Citeseer datasets under PGD attack.
+This repository contains the implementation of ARGS for generating ARGLT for Node Classification on Cora, Citeseer datasets under PGD attack using GCN.
 
 ## Table of Contents
 1. [Installation](#installation)
