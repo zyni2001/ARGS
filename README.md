@@ -4,7 +4,7 @@ This repository is the official implementation of [**Unveiling Adversarially Rob
 
 Graph lottery tickets (GLTs) consist of a sparse graph neural network (GNN) and a sparse input graph adjacency matrix. While GLTs reduce the computational cost of GNNs, their robustness against adversarial attacks remains underexplored. This work introduces **Adversarially Robust Graph Sparsification (ARGS)**, a framework that iteratively prunes both the adjacency matrix and GNN weights to produce **Adversarially Robust Graph Lottery Tickets (ARGLTs)**. ARGS uses a novel loss function that captures graph homophily and integrates both true labels of training nodes and pseudo labels of test nodes. This dual-pruning approach identifies sparse yet robust GLTs that maintain high classification accuracy under various structure perturbation attacks, including PGD, MetaAttack, PR-BCD, GR-BCD, and adaptive attacks.
 
-<img src="./ARGS.jpg" alt="ARGS Framework" width="300">
+<img src="./ARGS.jpg" alt="ARGS Framework" width="400">
 
 <a name="installation"></a>
 ## Installation
