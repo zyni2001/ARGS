@@ -16,17 +16,17 @@ pip install -r requirements.txt
 ```
 
 <a name="homophily"></a>
-## Defense on Homophilic Graphs
+## Defense on Homophilic Graphs (to-do)
 
 ARGS is evaluated on homophilic datasets like Cora, Citeseer, and PubMed under global structure poisoning attacks such as PGD and MetaAttack. The framework identifies ARGLTs that achieve similar accuracy as full models while reducing the graph and model sparsity by up to 98%. The results demonstrate the ability of ARGS to prune adversarial edges and maintain performance across different perturbation rates.
 
 <a name="heterophily"></a>
-## Defense on Heterophilic Graphs
+## Defense on Heterophilic Graphs (to-do)
 
 We extend the evaluation of ARGS to heterophilic datasets, such as Chameleon and Squirrel. The method uses a modified loss function that considers positional differences between connected nodes, improving robustness against adversarial modifications. Experimental results show that ARGS achieves higher graph sparsity while preserving classification accuracy compared to existing methods like GARNET.
 
 <a name="large-graph"></a>
-## Defense on Larger Graphs
+## Defense on Larger Graphs (to-do)
 
 ARGS scales to large datasets like OGBN-ArXiv and OGBN-Products, where it is evaluated under advanced structure perturbations, including the PR-BCD and GR-BCD attacks. Despite the increased complexity of these datasets, ARGS maintains high classification accuracy while reducing graph and model sparsity. For instance, on the OGBN-ArXiv dataset, ARGS achieves comparable accuracy to dense models with 94.5% model sparsity and 48.7% graph sparsity.
 
